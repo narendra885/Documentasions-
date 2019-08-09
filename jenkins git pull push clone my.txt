@@ -1,0 +1,14 @@
+Jenkins git pull push clone 
+
+
+1- first create directry 
+      mkdir NEW Directry
+       cd NEW Directry
+         git init
+
+2- then clone with user name and passwd  because it will not again if we do it in clone time 
+
+ git clone http://username:passwd@103.248.209.133:8090/narendra/testing.git
+
+3- check by giving git pull 
+                   git push

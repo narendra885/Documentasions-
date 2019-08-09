@@ -1,0 +1,53 @@
+
+GIT with Jenkins Job (remotrly)
+
+step-1 
+ Create a Repo in your git Hub (or) Git Lab
+  Copy that Http Clone url
+
+Step-2 
+In Jenkins create new jon  free style project
+
+if you whant to run job for remote host 
+ Download SSH plugin in jenkins
+  And go to ManagerJenkins- Configuresystems-ssh remote host 
+   Add your details as per it requriment 
+
+  Then go to job and got Bulid - Execute shell script
+      Select your instance in ssh site area
+      Add scripts in command as below and replace with your credentials
+
+script for clone ( if you whant to give username passwd at a time, it will not ask again when you push are pull) (remove username passwd just past url)
+             
+                 cd (directry in which you whant to clone)
+                 git init 
+                 git Clone git clone htpps://"[  username  ]" : "[  password  ]" @" [ Host Name/IP  ]" / "[  group name  ]" /  "[  project name  ]" .git
+	                            Ex: git clone https://username:passwd@gitlab.example.com/maven/game.git
+                 cd reponame
+                 touch filename
+                 git add .
+                 git commit -m "first commit"
+                 git pull
+                 git push origin master
+
+
+
+Script for already exsting repo in you machine for just PUSH & PULL
+                 cd (your git directry path)
+                  git pull (https://username:passwd@gitlab.example.com/maven/game.git)
+                  git push (https://username:passwd@gitlab.example.com/maven/game.git)
+                  
+
+Script for already exsting repo in you machine for just PUSH & PULL (with out ask paaswd)
+
+                    cd (your git direcrty Path)
+                    git remote remove origin
+		    git remote add origin (https://username:passwd@gitlab.example.com/maven/game.git )
+		      
+             
+
+
+               
+              
+
+

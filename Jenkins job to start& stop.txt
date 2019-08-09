@@ -1,0 +1,37 @@
+Stop&Start Instance fron Jenkins job
+
+Step-1
+ First check your jenkins machine That AWS credentials is Belong to your AWS account IAM 
+
+Step-2
+  -Create a new  job 
+  -In General Select PARAMETERIZED    (It is for only to give different instanceIds if you want to run in same job for other instance also.If not no need with this postion)
+            - Selecet PARAMETERIZED 
+                -select String Parameter 
+Note-(The name which you given in parameter Should be same No differes in single word in code also)
+      ( Exp- Name- instanceID   Check in code it will be same inplace (echo "instanceId") And ($instanceID))
+               
+   
+   -In Build Triggers select Bulid Periodically (if you want to run Job Periodically (cron job))
+   -In Bulid  select Execute Shell(For linux) 
+          Add below code 
+
+        (#!/bin/bash
+        echo "instanceID"
+        code=$(aws ec2 describe-instances --instance-ids $instanceID | grep Code | awk -F: 'NR==2 {print $2}' | tr ',' '\n')
+         echo $code
+         if [ $code == 16 ]
+         then
+         aws ec2 stop-instances --instance-ids $instanceID
+         echo Instance $InstanceID Stopped
+         exit 1;
+         elif [ $code == 80 ]
+         then
+         aws ec2 start-instances --instance-ids $instanceID
+         echo Instance $InstanceID is Strating
+         fi)
+ 
+    -Save job 
+
+Step-3
+    Bulid job  it will ask instanceID give it and bulid
