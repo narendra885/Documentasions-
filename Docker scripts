@@ -1,0 +1,39 @@
+-------- Gitlab commends to run -------------
+docker run -d \
+--hostname gitlab.example.com \
+--publish 443:443 --publish 888:80 --publish 222:22 \
+--name gitlab \
+--volume /srv/gitlab/config:/etc/gitlab \
+--volume /srv/gitlab/logs:/var/log/gitlab \
+--volume /srv/gitlab/data:/var/opt/gitlab \
+gitlab/gitlab-ce:latest
+
+
+
+
+
+
+
+----------Redmine tool script save in  filename.yml --------------
+---------- then run with commend  ' docker-compose -f stack.yml up'
+
+
+version: '3.1'
+
+services:
+
+  redmine:
+    image: redmine
+    restart: always
+    ports:
+      - 888:3000
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: 1234
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: redmine
