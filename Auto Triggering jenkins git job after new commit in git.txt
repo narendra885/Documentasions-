@@ -1,0 +1,34 @@
+Auto Triggering jenkins git job after new commit in git 
+
+Step-1
+   Create a Job 
+
+Step2-2
+    Go to General and select Github Project And give your git repo url
+
+        go to Source Code Management and select Git and give git repo url and credentials
+
+            go to Bulid Triggers and select GitHub hook trigger for GITScm polling
+
+                      go to Bulid  if you whant to write any script 
+                                         Save job
+
+Step-3 
+Go to manage jenkins-Configure systems- GitHub Pull Requests
+                 At the end you will find (GitHub Pull Requests) give your git repo url
+
+save it
+
+
+Step-4
+ Go to git hub
+      Go to your Repo - setting of repo -webhook - Add webhook
+          In Add webhook give your jenkins machine url with username and passwd
+          payload :-  http://username:passwd@Public IP:portnumber/github-webhook/
+          Content type :- Json
+           And save it
+
+
+
+Check it is showing green tick in webhook 
+TRy to do one change and check logs in webhook if any error 
