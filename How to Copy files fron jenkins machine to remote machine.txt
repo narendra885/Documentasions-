@@ -1,0 +1,8 @@
+How to Copy files fron jenkins machine to remote machine
+
+Everything is same in script write command
+
+scp -i (Key path (.pem)) (File to copy path) username@your remote machine ip:(path of file to past)
+
+with passwd
+scp (File to copy path) username:passwd@your remote machine ip:(path of file to past)
