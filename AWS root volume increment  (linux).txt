@@ -1,0 +1,29 @@
+AWS root volume increment
+For linux
+
+
+Note- First take snapshort on volume for  backup
+
+
+Step-1 
+Go to Volume which should me increase and select it 
+ 
+   Go to Actions - Modify volume
+                  At size menstion how much size do you want to increase  and press modify
+
+
+
+Step-2
+go to commend line 
+and execute below commends
+-lsblk
+   you will find   xvda  size what you increase and xvda 1  same as old 
+ now run - growpart  /dev/xvda 1
+    Now you will find both same but df -h it will not change so run below commend
+
+now run -resize2fs /dev/xvda1
+
+check df -h 
+
+check your data once
+
