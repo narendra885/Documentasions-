@@ -27,3 +27,4 @@ check df -h
 
 check your data once
 
+ref link - https://www.youtube.com/watch?v=0GFZvN-Cg4c
