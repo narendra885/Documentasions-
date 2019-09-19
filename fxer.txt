@@ -1,0 +1,101 @@
+Php Installation:
+	Ref: https://askubuntu.com/questions/1148129/how-do-i-enable-php-7-3-in-apache2
+	Steps to Install:
+
+		sudo add-apt-repository ppa:ondrej/php
+
+		sudo apt-get install php7.3 php7.3-cli php7.3-mysql php7.3-gd php7.3-imagick php7.3-recode php7.3-tidy php7.3-xmlrpc php7.3-common php7.3-curl php7.3-mbstring php7.3-xml php7.3-bcmath php7.3-bz2 php7.3-intl php7.3-json php7.3-readline php7.3-zip
+
+		sudo apt install libapache2-mod-php7.3
+
+		sudo a2enmod php7.3
+==================================================
+	Remove/Disable previous versions:
+	
+		cd /etc/apache2/mods-enabled
+		ls -la | grep php
+		sudo rm php7.0.conf
+==================================================
+	If you have multiple versions of php. We can change versions:
+
+		update-alternatives --config php
+
+==================================================
+	To enable the specific version of php to "apache"
+
+		sudo a2enmod php7.3
+	
+	To disable the specific version of php to "apache"
+		
+		sudo a2dismod php7.0 /php7.3..
+
+	Restart the apache server
+
+		service apache2 restart
+
+==================================================
+	Enable the extentions to pdo,mysql...
+
+		cd /etc/php/7.3/apache2
+		
+		vi phi.ini
+	{ uncomment the extentions that you want }
+
+=========================================================================
+		@@@@@Composer Install@@@@@
+=========================================================================
+	To install composer install:
+
+		sudo apt install composer -y
+
+===============================================================
+
+@@@@@@@@@@@@@@>>MySql-8 Installation<<@@@@@@@@@@@@@@@@@@@@
+=======================================================================
+
+	Ref: https://www.percona.com/blog/2018/05/14/installing-mysql-8-on-ubuntu-16-04-lts/
+
+	Installation Steps:	
+		
+	    => sudo  wget https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.deb
+	    => sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb
+	    => sudo apt-get update
+	    => sudo apt-get install mysql-server
+
+======================================================================
+	@@@@***@@@@****Important Note******@@@@****@@@@
+======================================================================
+	We need to create a new user with "mysql_native_passowd". Other wise we couldn't access the db from any webapp.
+
+	Configure the "mysqld.conf" file for that "mysql_native_password" to be applied.
+	
+	=>  cd /etc/mysql/mysql.conf.d/
+	
+	=> vi mysqld.cnf
+		"
+		
+		bind_address=127.0.0.1
+		port=3306	
+
+		#default_authentication_plugin=caching_sha2_password
+		default_authentication_plugin=mysql_native_password
+		"
+
+	=> Restart the mysql server
+		
+	        service mysql restart
+=================================================================
+	Ref: https://medium.com/@crmcmullen/how-to-run-mysql-8-0-with-native-password-authentication-502de5bac661
+
+	ex:
+	$ mysql -u root -p
+	
+	@> CREATE USER 'your_username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_paasword';
+
+	@> GRANT ALL PRIVILEGES ON db.* TO 'your_username'@'localhost';
+
+	@> FLUSH PRIVILEGES;
+
+=====================================================================
+
+			
